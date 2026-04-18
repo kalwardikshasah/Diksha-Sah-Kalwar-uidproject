@@ -634,47 +634,47 @@ footer p {
 <!-- PRODUCTS GRID -->
 <div class="products">
 
-  <div class="card" data-name="White Lily Bouquet" data-price="799" data-img="sym1.jpg">
-    <span class="heart" data-name="White Lily Bouquet" data-price="799" data-img="sym1.jpg">♡</span>
-    <img src="sym1.jpg" alt="White Lily Bouquet">
+  <div class="card" data-name="White Lily Bouquet" data-price="799" data-img="image/sym1.jpg">
+    <span class="heart" data-name="White Lily Bouquet" data-price="799" data-img="image/sym1.jpg">♡</span>
+    <img src="simage/ym1.jpg" alt="White Lily Bouquet">
     <div class="card-content">
       <h3>White Lily Bouquet</h3>
       <p class="desc">Elegant white lilies for peaceful remembrance</p>
       <p class="price">₹799</p>
-      <button class="add-btn" onclick="addToCart('White Lily Bouquet', 799, 'sym1.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('White Lily Bouquet', 799, 'image/sym1.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 
-  <div class="card" data-name="Peace Roses" data-price="699" data-img="cat4.jpg">
-    <span class="heart" data-name="Peace Roses" data-price="699" data-img="cat4.jpg">♡</span>
-    <img src="cat4.jpg" alt="Peace Roses">
+  <div class="card" data-name="Peace Roses" data-price="699" data-img="image/cat4.jpg">
+    <span class="heart" data-name="Peace Roses" data-price="699" data-img="image/cat4.jpg">♡</span>
+    <img src="image/cat4.jpg" alt="Peace Roses">
     <div class="card-content">
       <h3>Peace Roses</h3>
       <p class="desc">Serene white roses symbolizing peace</p>
       <p class="price">₹699</p>
-      <button class="add-btn" onclick="addToCart('Peace Roses', 699, 'cat4.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('Peace Roses', 699, 'image/cat4.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 
-  <div class="card" data-name="White Orchids" data-price="899" data-img="sym3.jpg">
-    <span class="heart" data-name="White Orchids" data-price="899" data-img="sym3.jpg">♡</span>
-    <img src="sym3.jpg" alt="White Orchids">
+  <div class="card" data-name="White Orchids" data-price="899" data-img="image/sym3.jpg">
+    <span class="heart" data-name="White Orchids" data-price="899" data-img="image/sym3.jpg">♡</span>
+    <img src="image/sym3.jpg" alt="White Orchids">
     <div class="card-content">
       <h3>White Orchids</h3>
       <p class="desc">Premium white orchids for lasting memories</p>
       <p class="price">₹899</p>
-      <button class="add-btn" onclick="addToCart('White Orchids', 899, 'sym3.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('White Orchids', 899, 'image/sym3.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 
-  <div class="card" data-name="Mixed flower Bouquet" data-price="899" data-img="s4.jpg">
-    <span class="heart" data-name="Mixed flower Bouquet" data-price="899" data-img="s4.jpg">♡</span>
-    <img src="s4.jpg" alt="Mixed Flower Bouquet">
+  <div class="card" data-name="Mixed flower Bouquet" data-price="899" data-img="image/s4.jpg">
+    <span class="heart" data-name="Mixed flower Bouquet" data-price="899" data-img="image/s4.jpg">♡</span>
+    <img src="image/s4.jpg" alt="Mixed Flower Bouquet">
     <div class="card-content">
       <h3>Mixed Flower Bouquet</h3>
       <p class="desc">Beautiful mixed flowers for sympathy</p>
       <p class="price">₹899</p>
-      <button class="add-btn" onclick="addToCart('Mixed flower Bouquet', 899, 's4.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('Mixed flower Bouquet', 899, 'image/s4.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 
@@ -757,7 +757,7 @@ function updateWishlistUI() {
     const card = document.createElement("div");
     card.className = "wishlist-card";
     card.innerHTML = `
-      <img src="${item.image || 'sym1.jpg'}" alt="${item.name}">
+      <img src="${item.image || 'image/sym1.jpg'}" alt="${item.name}">
       <div class="wishlist-info">
         <h4>${item.name}</h4>
         <div class="price">₹${item.price}</div>
