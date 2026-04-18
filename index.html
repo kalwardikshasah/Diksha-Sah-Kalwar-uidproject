@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Bloomify - Premium Flower Boutique</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles for wishlist page and dynamic updates */
+        .wish-btn {
+            background: rgba(255,255,255,0.85);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .wish-btn.active {
+            color: #ff4081;
+            background: white;
+            text-shadow: 0 0 2px rgba(255,64,129,0.3);
+        }
+        .wish-btn:hover {
+            transform: scale(1.05);
+            background: white;
+        }
+        .product {
+            position: relative;
+        }
+        
+        /* Professional Badge Styling */
+        .icon {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: #444;
+            position: relative;
+            transition: 0.3s;
+        }
+        
+        .icon:hover {
+            color: #ff4081;
+            transform: scale(1.05);
+        }
+        
+        #wish-count, #cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: #ff4081;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .icons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        /* Ensure product buttons are visible */
+        .actions button {
+            background: #ff4081;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .actions button:hover {
+            background: #e0336e;
+            transform: scale(1.02);
+        }
+        .sale .btn {
+            background: white;
+            color: #ff4081;
+        }
+        .sale .btn:hover {
+            background: #ff4081;
+            color: white;
+        }
+        /* fix category link colors */
+        .cat {
+            text-decoration: none;
+            color: #333;
+        }
+        .cat p {
+            color: #333;
+        }
+
+        /* ========== PROFESSIONAL NAVBAR STYLES ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #fff0f5, #ffe4ec);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 64, 129, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff4081, #ff80ab);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 15px;
+            position: relative;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: #ff4081;
+            bottom: 0;
+            left: 0;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: #ff4081;
+        }
+
+        .search {
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid #f0d0d8;
+            background: #fefaf8;
+            outline: none;
+            font-size: 14px;
+            transition: 0.3s;
+            width: 180px;
+        }
+
+        .search:focus {
+            border-color: #ff4081;
+            box-shadow: 0 0 0 3px rgba(255, 64, 129, 0.1);
+            width: 220px;
+        }
+
+        /* ========== MOBILE RESPONSIVE STYLES ========== */
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                padding: 12px 20px;
+                gap: 12px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            nav {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                gap: 25px;
+                flex-wrap: wrap;
+            }
+            
+            nav a {
+                font-size: 14px;
+            }
+            
+            .right-section {
+                flex: 1;
+                justify-content: flex-end;
+                gap: 12px;
+            }
+            
+            .search {
+                width: 120px;
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .search:focus {
+                width: 150px;
+            }
+            
+            .icons {
+                gap: 15px;
+            }
+            
+            .icon {
+                font-size: 20px;
+            }
+            
+            #wish-count, #cart-count {
+                font-size: 10px;
+                min-width: 16px;
+                height: 16px;
+                top: -6px;
+                right: -10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .top-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .top-card {
+                height: 200px;
+            }
+            
+            .overlay h2 {
+                font-size: 18px;
+            }
+            
+            .btn {
+                padding: 6px 15px;
+                font-size: 12px;
+            }
+            
+            .section-title {
+                font-size: 22px;
+                margin-top: 30px;
+                margin-bottom: 15px;
+            }
+            
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .cat img {
+                height: 140px;
+            }
+            
+            .cat p {
+                font-size: 14px;
+                padding: 8px;
+            }
+            
+            .sale {
+                height: auto;
+                padding: 40px 20px;
+                text-align: center;
+            }
+            
+            .sale h1 {
+                font-size: 32px;
+            }
+            
+            .sale h2 {
+                font-size: 20px;
+            }
+            
+            .sale p {
+                font-size: 14px;
+            }
+            
+            .products {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .product img {
+                height: 150px;
+            }
+            
+            .product p {
+                font-size: 14px;
+                padding: 8px;
+            }
+            
+            .product h4 {
+                font-size: 16px;
+            }
+            
+            .actions button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            
+            .wish-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+                top: 8px;
+                right: 8px;
+            }
+            
+            .footer {
+                padding: 30px 20px 15px;
+                margin-top: 40px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            
+            .footer-col h3 {
+                margin-bottom: 10px;
+                font-size: 18px;
+            }
+            
+            .footer-col ul li {
+                margin: 5px 0;
+            }
+            
+            .newsletter {
+                justify-content: center;
+            }
+            
+            .footer-bottom p {
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 10px 15px;
+            }
+            
+            .search {
+                width: 90px;
+            }
+            
+            .search:focus {
+                width: 120px;
+            }
+            
+            .right-section {
+                gap: 8px;
+            }
+            
+            .icons {
+                gap: 12px;
+            }
+            
+            .categories {
+                gap: 10px;
+            }
+            
+            .cat img {
+                height: 110px;
+            }
+            
+            .products {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            
+            .product img {
+                height: 130px;
+            }
+            
+            .top-card {
+                height: 180px;
+            }
+            
+            .overlay h2 {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">🌸 Bloomify</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="Occassion.html">Occasions</a>
+        <a href="about.html">About</a>
+    </nav>
+
+    <!-- RIGHT SIDE GROUP -->
+    <div class="right-section">
+        <input class="search" placeholder="Search flowers...">
+
+        <div class="icons">
+            <!-- ❤️ WISHLIST with dynamic count -->
+            <a href="wishlist.html" class="icon" id="wishlistIconLink">
+                ♡
+                <span id="wish-count">0</span>
+            </a>
+
+            <!-- 🛒 CART -->
+            <a href="cart.html" class="icon">
+                🛒
+                <span id="cart-count">0</span>
+            </a>
+
+            <!-- 👤 PROFILE -->
+            <a href="profile.html" class="icon">👤</a>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="top-cards">
+        <div class="top-card" style="background-image:url('img1.jpg')">
+            <a href="Occassion.html" style="text-decoration: none; color:white">
+                <div class="overlay">
+                    <h2>Fresh Flowers for Every Occasion</h2>
+                    <button class="btn">Shop Now</button>
+                </div>
+            </a>
+        </div>
+
+        <div class="top-card" style="background-image:url('img2.jpg')">
+            <a href="about.html" style="text-decoration: none; color:white">
+                <div class="overlay">
+                    <h2>Brighten Someone's Day</h2>
+                    <button class="btn">Explore</button>
+                </div>
+            </a>
+        </div>
+
+        <div class="top-card" style="background-image:url('img3.jpg')">
+            <a href="shop.html" style="text-decoration: none; color:white">
+                <div class="overlay">
+                    <h2>Elegant Bouquets Delivered Fast</h2>
+                    <button class="btn">Order Now</button>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <h2 class="section-title">Featured Categories</h2>
+
+    <div class="categories">
+        <a href="birthday.html" class="cat">
+            <img src="cat1.jpg" alt="Birthday">
+            <p>🎂 Birthday</p>
+        </a>
+        <a href="anniversary.html" class="cat">
+            <img src="cat.png" alt="Anniversary">
+            <p>💛 Anniversary</p>
+        </a>
+        <a href="love.html" class="cat">
+            <img src="cat3.jpg" alt="Love">
+            <p>❤️ Love</p>
+        </a>
+        <a href="sympathy.html" class="cat">
+            <img src="cat4.jpg" alt="Sympathy">
+            <p>🤍 Sympathy</p>
+        </a>
+    </div>
+
+    <div class="sale">
+        <h2>Spring Sale!</h2>
+        <h1>Flat 20% OFF</h1>
+        <p>On Flowers, Chocolates & Gifts</p>
+        <button class="btn">Use Code: BLOSSOM20</button>
+    </div>
+
+    <h2 class="section-title">Popular Products</h2>
+
+    <div class="products">
+        <div class="product" data-name="Rose Basket" data-price="499" data-img="p1.jpg">
+            <button class="wish-btn" onclick="toggleWishlist(this, 'Rose Basket', 499, 'p1.jpg')">♡</button>
+            <img src="p1.jpg" alt="Rose Basket">
+            <p style="text-align: center;">Rose Basket</p>
+            <h4 style="text-align: center;">₹499</h4>
+            <div class="actions">
+                <button onclick="addToCart('Rose Basket', 499, 'p1.jpg')">Add to 🛒</button>
+            </div>
+        </div>
+
+        <div class="product" data-name="Pink Bouquet" data-price="599" data-img="p2.jpg">
+            <button class="wish-btn" onclick="toggleWishlist(this, 'Pink Bouquet', 599, 'p2.jpg')">♡</button>
+            <img src="p2.jpg" alt="Pink Bouquet">
+            <p style="text-align: center;">Pink Bouquet</p>
+            <h4 style="text-align: center;">₹599</h4>
+            <div class="actions">
+                <button onclick="addToCart('Pink Bouquet', 599, 'p2.jpg')">Add to 🛒</button>
+            </div>
+        </div>
+
+        <div class="product" data-name="Mixed Flowers" data-price="699" data-img="p3.jpg">
+            <button class="wish-btn" onclick="toggleWishlist(this, 'Mixed Flowers', 699, 'p3.jpg')">♡</button>
+            <img src="p3.jpg" alt="Mixed Flowers">
+            <p style="text-align: center;">Mixed Flowers</p>
+            <h4 style="text-align: center;">₹699</h4>
+            <div class="actions">
+                <button onclick="addToCart('Mixed Flowers', 699, 'p3.jpg')">Add to 🛒</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h2 class="footer-logo">🌸 Bloomify</h2>
+            <p>Delivering happiness with fresh flowers, gifts & love across every occasion.</p>
+        </div>
+        <div class="footer-col">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="Occassion.html">Occasions</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Services</h3>
+            <ul>
+                <li><a href="delivery.html">Same Day Delivery</a></li>
+                <li><a href="shop.html">Custom Bouquets</a></li>
+                <li><a href="gift.html">Gift Combos</a></li>
+                <li><a href="#">Subscription</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h3>Subscribe</h3>
+            <p>Get offers & updates</p>
+            <div class="newsletter">
+                <input type="email" placeholder="Enter your email">
+                <button>Subscribe</button>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Bloomify. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // ---------- WISHLIST FUNCTIONALITY (FIXED) ----------
+    // toggleWishlist: adds or removes items from wishlist, updates UI and counter
+    function toggleWishlist(btnElement, name, price, image) {
+        // Get current wishlist from localStorage
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        
+        // Check if product already exists in wishlist
+        const existingIndex = wishlist.findIndex(item => item.name === name);
+        
+        if (existingIndex !== -1) {
+            // Remove from wishlist
+            wishlist.splice(existingIndex, 1);
+            // Update button appearance: remove active class
+            btnElement.classList.remove("active");
+            // Optional: change heart symbol style
+            btnElement.textContent = "♡";
+            // Show removal feedback (optional)
+            showToast(`${name} removed from wishlist ❌`);
+        } else {
+            // Add to wishlist
+            wishlist.push({
+                name: name,
+                price: price,
+                image: image,
+                addedAt: new Date().toISOString()
+            });
+            // Update button appearance: add active class
+            btnElement.classList.add("active");
+            btnElement.textContent = "❤️";
+            showToast(`${name} added to wishlist ❤️`);
+        }
+        
+        // Save updated wishlist back to localStorage
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+        
+        // Update wishlist count display
+        updateWishlistCount();
+        
+
+        window.dispatchEvent(new Event('wishlistUpdated'));
+    }
+    
+    // Update the wishlist counter in the header
+    function updateWishlistCount() {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const wishCountSpan = document.getElementById("wish-count");
+        if (wishCountSpan) {
+            wishCountSpan.textContent = wishlist.length;
+        }
+    }
+    
+    // FIXED: Cart function with image parameter - now image is properly saved
+    function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let item = cart.find(p => p.name === name);
+        if (item) {
+            item.qty += 1;
+        } else {
+            // IMPORTANT FIX: Now saving image with the product
+            cart.push({ 
+                name: name, 
+                price: price, 
+                image: image,
+                qty: 1 
+            });
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        showToast(name + " added to cart 🛒");
+    }
+    
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let totalItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const cartCountSpan = document.getElementById("cart-count");
+        if (cartCountSpan) {
+            cartCountSpan.textContent = totalItems;
+        }
+    }
+    
+    // Helper: simple toast notification (non-intrusive)
+    function showToast(message) {
+        // Create toast element if not exists
+        let toast = document.getElementById('bloom-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'bloom-toast';
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = '#333';
+            toast.style.color = '#fff';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '30px';
+            toast.style.fontSize = '14px';
+            toast.style.zIndex = '9999';
+            toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+            toast.style.fontFamily = 'Poppins, sans-serif';
+            toast.style.pointerEvents = 'none';
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.2s ease';
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.style.opacity = '1';
+        setTimeout(() => {
+            toast.style.opacity = '0';
+        }, 1800);
+    }
+    
+    // Sync all wishlist buttons on page load: apply active class based on localStorage
+    function syncWishlistButtons() {
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        const allWishBtns = document.querySelectorAll(".wish-btn");
+        allWishBtns.forEach(btn => {
+            // Get product name from the button's onclick attribute or from parent product
+            let productName = "";
+            // Try to extract product name from data attribute or from sibling/ parent
+            const productDiv = btn.closest(".product");
+            if (productDiv) {
+                const nameElem = productDiv.querySelector("p");
+                if (nameElem && nameElem.innerText) {
+                    productName = nameElem.innerText.trim();
+                } else if (productDiv.getAttribute("data-name")) {
+                    productName = productDiv.getAttribute("data-name");
+                }
+            }
+            // Alternative: parse onclick string? safer to use dataset.
+            if (productName) {
+                const exists = wishlist.some(item => item.name === productName);
+                if (exists) {
+                    btn.classList.add("active");
+                    btn.textContent = "❤️";
+                } else {
+                    btn.classList.remove("active");
+                    btn.textContent = "♡";
+                }
+            }
+        });
+        updateWishlistCount();
+        updateCartCount();
+    }
+    
+    // Also ensure that if any wishlist changes from another tab (storage event), sync counters
+    function handleStorageChange(e) {
+        if (e.key === 'wishlist') {
+            syncWishlistButtons();
+        } else if (e.key === 'cart') {
+            updateCartCount();
+        }
+    }
+    
+    // On page load: initial sync, set up storage event listener
+    window.addEventListener('load', function() {
+        syncWishlistButtons();
+        updateCartCount();
+        
+        // Optional: watch for storage events (if multiple tabs)
+        window.addEventListener('storage', handleStorageChange);
+        
+        // Custom event for any internal updates
+        window.addEventListener('wishlistUpdated', function() {
+            syncWishlistButtons();
+        });
+    });
+    
+    // Re-run when dynamic content might be loaded (just in case)
+    document.addEventListener('DOMContentLoaded', function() {
+        syncWishlistButtons();
+        updateCartCount();
+    });
+    
+  
+    window.refreshWishlistUI = syncWishlistButtons;
+    
+ 
+    setTimeout(() => {
+        syncWishlistButtons();
+        updateCartCount();
+    }, 50);
+    
+
+    console.log("Bloomify wishlist system fixed and ready ✅");
+    
+
+    window.getWishlist = function() {
+        return JSON.parse(localStorage.getItem("wishlist")) || [];
+    };
+    
+
+    try {
+        if (!localStorage.getItem('wishlist')) localStorage.setItem('wishlist', JSON.stringify([]));
+        if (!localStorage.getItem('cart')) localStorage.setItem('cart', JSON.stringify([]));
+    } catch(e) { console.warn(e); }
+    
+    // Set initial count values after everything loaded
+    window.addEventListener('pageshow', function() {
+        syncWishlistButtons();
+        updateCartCount();
+    });
+    
+    
+    setTimeout(() => {
+        syncWishlistButtons();
+        updateCartCount();
+    }, 100);
+    
+</script>
+</body>
+</html>
