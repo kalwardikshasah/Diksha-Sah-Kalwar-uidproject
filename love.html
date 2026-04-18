@@ -669,36 +669,36 @@ nav a:hover::after{
 <!-- 🌸 PRODUCTS -->
 <section class="products">
 
-  <div class="product-card" data-name="Red Roses Bouquet" data-price="799" data-img="flower.jpg">
-    <span class="heart" data-name="Red Roses Bouquet" data-price="799" data-img="flower.jpg">♡</span>
-    <img src="flower.jpg">
+  <div class="product-card" data-name="Red Roses Bouquet" data-price="799" data-img="image/flower.jpg">
+    <span class="heart" data-name="Red Roses Bouquet" data-price="799" data-img="image/flower.jpg">♡</span>
+    <img src="image/flower.jpg">
     <h3>Red Roses Bouquet</h3>
     <p class="price">₹799</p>
-    <button class="btn" onclick="addToCart('Red Roses Bouquet',799,'flower.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Red Roses Bouquet',799,'image/flower.jpg')">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-name="Chocolate Box" data-price="599" data-img="g1.jpg">
-    <span class="heart" data-name="Chocolate Box" data-price="599" data-img="g1.jpg">♡</span>
-    <img src="g1.jpg">
+  <div class="product-card" data-name="Chocolate Box" data-price="599" data-img="image/g1.jpg">
+    <span class="heart" data-name="Chocolate Box" data-price="599" data-img="image/g1.jpg">♡</span>
+    <img src="image/g1.jpg">
     <h3>Chocolate Box</h3>
     <p class="price">₹599</p>
-    <button class="btn" onclick="addToCart('Chocolate Box',599,'g1.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Chocolate Box',599,'image/g1.jpg')">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-name="Couple Teddy" data-price="699" data-img="g2.jpg">
-    <span class="heart" data-name="Couple Teddy" data-price="699" data-img="g2.jpg">♡</span>
-    <img src="g2.jpg">
+  <div class="product-card" data-name="Couple Teddy" data-price="699" data-img="image/g2.jpg">
+    <span class="heart" data-name="Couple Teddy" data-price="699" data-img="image/g2.jpg">♡</span>
+    <img src="image/g2.jpg">
     <h3>Couple Teddy</h3>
     <p class="price">₹699</p>
-    <button class="btn" onclick="addToCart('Couple Teddy',699,'g2.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Couple Teddy',699,'image/g2.jpg')">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-name="Love Frame" data-price="499" data-img="a4.jpg">
-    <span class="heart" data-name="Love Frame" data-price="499" data-img="a4.jpg">♡</span>
-    <img src="a4.jpg">
+  <div class="product-card" data-name="Love Frame" data-price="499" data-img="image/a4.jpg">
+    <span class="heart" data-name="Love Frame" data-price="499" data-img="image/a4.jpg">♡</span>
+    <img src="image/a4.jpg">
     <h3>Love Frame</h3>
     <p class="price">₹499</p>
-    <button class="btn" onclick="addToCart('Love Frame',499,'a4.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Love Frame',499,'image/a4.jpg')">Add to Cart</button>
   </div>
 
 </section>
@@ -760,7 +760,7 @@ function toggleWishlist(element, name, price, image) {
     }
     showToastMessage(`✨ ${name} removed from wishlist`);
   } else {
-    wishlist.push({ name, price, image: image || 'flower.jpg', addedAt: Date.now() });
+    wishlist.push({ name, price, image: image || 'image/flower.jpg', addedAt: Date.now() });
     if (heartEl) {
       heartEl.classList.add("active");
       heartEl.innerHTML = "❤️";
@@ -799,7 +799,7 @@ function updateWishlistUI() {
     const card = document.createElement("div");
     card.className = "wishlist-card";
     card.innerHTML = `
-      <img src="${item.image || 'flower.jpg'}" alt="${item.name}" onerror="this.src='flower.jpg'">
+      <img src="${item.image || 'image/flower.jpg'}" alt="${item.name}" onerror="this.src='flower.jpg'">
       <div class="wishlist-info">
         <h4>${item.name}</h4>
         <div class="price">₹${item.price}</div>
