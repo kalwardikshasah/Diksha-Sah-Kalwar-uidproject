@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gifts - Bloomify</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins;
+  background:linear-gradient(to right,#fff,#ffe4ec);
+}
+
+/* 🌸 HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 50px;
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:700;
+  color:#ff4081;
+}
+
+nav{
+  display:flex;
+  gap:30px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:500;
+}
+
+nav a:hover{
+  color:#ff4081;
+}
+
+/* RIGHT ICONS */
+.icons{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+/* ICON STYLE */
+.icon{
+  position:relative;
+  font-size:22px;
+  text-decoration:none;
+  color:#333;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.icon:hover{
+  transform:scale(1.2);
+  color:#ff4081;
+}
+
+/* ❤️ BIG HEART */
+.wish-icon{
+  font-size:28px;
+}
+
+/* BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-10px;
+  background:#ff4081;
+  color:white;
+  font-size:11px;
+  padding:3px 7px;
+  border-radius:50%;
+}
+
+/* SECTION */
+.container{
+  padding:40px;
+}
+
+.section-title{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:30px;
+}
+
+/* GRID */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.product{
+  background:white;
+  padding:15px;
+  border-radius:20px;
+  text-align:center;
+  position:relative;
+  transition:0.4s;
+  overflow:hidden;
+}
+
+.product:hover{
+  transform:translateY(-10px);
+  box-shadow:0 15px 25px rgba(0,0,0,0.15);
+}
+
+/* IMAGE */
+.product img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:15px;
+  transition:0.4s;
+}
+
+/* BUTTON */
+.actions button{
+  margin-top:10px;
+  padding:10px 15px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(45deg,#ff4081,#ff80ab);
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.actions button:hover{
+  transform:scale(1.05);
+  background-color:#f52e70;
+}
+
+/* ❤️ HEART - Interflora Style */
+.heart{
+  position:absolute;
+  top:12px;
+  right:15px;
+  font-size:28px;
+  cursor:pointer;
+  background:rgba(255,255,255,0.85);
+  width:38px;
+  height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  backdrop-filter:blur(2px);
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  transition:0.2s;
+  z-index:10;
+  color:#aaa;
+}
+
+.heart:hover{
+  transform:scale(1.1);
+  background:white;
+}
+
+.heart.active{
+  color:#ff4081;
+  background:white;
+}
+
+/* 🔥 TOAST */
+.toast{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#333;
+  color:white;
+  padding:12px 18px;
+  border-radius:25px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:0.4s;
+  z-index:1000;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* WISHLIST PANEL - Interflora Style Slide-out */
+.wishlist-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 2000;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.25s ease;
+}
+
+.wishlist-panel {
+  position: fixed;
+  top: 0;
+  right: -450px;
+  width: 450px;
+  max-width: 90vw;
+  height: 100%;
+  background: white;
+  box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+  z-index: 2001;
+  transition: right 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px 0 0 28px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.wishlist-panel.open {
+  right: 0;
+}
+
+.wishlist-overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.wishlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+  border-bottom: 1px solid #f0e0d8;
+}
+
+.wishlist-header h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2d2a26;
+  margin: 0;
+}
+
+.close-wishlist {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #aa8e82;
+  transition: 0.2s;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-wishlist:hover {
+  color: #ff4081;
+  transform: scale(1.1);
+}
+
+.wishlist-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.wishlist-empty {
+  text-align: center;
+  padding: 50px 24px;
+  color: #bda89c;
+  font-size: 15px;
+}
+
+.wishlist-card {
+  display: flex;
+  gap: 16px;
+  background: #fefaf8;
+  border-radius: 20px;
+  padding: 12px;
+  align-items: center;
+  border: 1px solid #f3e5df;
+  transition: 0.2s;
+}
+
+.wishlist-card:hover {
+  background: #fff5f0;
+  transform: translateX(-2px);
+}
+
+.wishlist-card img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.wishlist-info {
+  flex: 1;
+}
+
+.wishlist-info h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  color: #2d2a26;
+}
+
+.wishlist-info .price {
+  color: #ff4081;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.remove-wish {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #c5aca0;
+  transition: 0.2s;
+  padding: 8px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-wish:hover {
+  color: #ff4081;
+  background: rgba(255,64,129,0.1);
+  transform: scale(1.05);
+}
+
+.wishlist-footer {
+  padding: 20px 24px 30px;
+  border-top: 1px solid #f3e5df;
+}
+
+.move-to-cart-btn {
+  width: 100%;
+  background: #2d2a26;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: 'Poppins', sans-serif;
+}
+
+.move-to-cart-btn:hover {
+  background: #ff4081;
+}
+
+@media (max-width: 600px) {
+  .wishlist-panel { width: 100%; border-radius: 0; }
+  header { padding: 15px 20px; flex-wrap: wrap; gap: 10px; }
+  nav { order: 3; width: 100%; justify-content: center; margin-top: 10px; }
+  .container { padding: 20px; }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🌸 Bloomify</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="Occassion.html">Occasion</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <div class="icons">
+
+    <!-- ❤️ WISHLIST ICON - Opens Interflora style panel -->
+    <a href="javascript:void(0)" class="icon wish-icon" id="openWishlistBtn">
+      ♡
+      <span id="wish-count" class="badge">0</span>
+    </a>
+
+    <!-- 🛒 CART -->
+    <a href="cart.html" class="icon">
+      🛒
+      <span id="cart-count" class="badge">0</span>
+    </a>
+
+    <!-- 👤 PROFILE -->
+    <a href="profile.html" class="icon">👤</a>
+
+  </div>
+</header>
+
+<div class="container">
+
+  <h2 class="section-title">🎁 Gift Collection</h2>
+
+  <div class="products">
+
+    <div class="product" data-name="Chocolate Box" data-price="399" data-img="g1.jpg">
+      <span class="heart" data-name="Chocolate Box" data-price="399" data-img="g1.jpg">♡</span>
+      <img src="g1.jpg">
+      <p>Chocolate Box</p>
+      <h4>₹399</h4>
+      <div class="actions">
+        <button onclick="addToCart('Chocolate Box',399,'g1.jpg')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Teddy Bear" data-price="499" data-img="g2.jpg">
+      <span class="heart" data-name="Teddy Bear" data-price="499" data-img="g2.jpg">♡</span>
+      <img src="g2.jpg">
+      <p>Teddy Bear</p>
+      <h4>₹499</h4>
+      <div class="actions">
+        <button onclick="addToCart('Teddy Bear',499,'g2.jpg')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Gift Hamper" data-price="799" data-img="gift.jpg">
+      <span class="heart" data-name="Gift Hamper" data-price="799" data-img="gift.jpg">♡</span>
+      <img src="gift.jpg">
+      <p>Gift Hamper</p>
+      <h4>₹799</h4>
+      <div class="actions">
+        <button onclick="addToCart('Gift Hamper',799,'gift.jpg')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product" data-name="Surprise Box" data-price="599" data-img="g4.jpg">
+      <span class="heart" data-name="Surprise Box" data-price="599" data-img="g4.jpg">♡</span>
+      <img src="g4.jpg">
+      <p>Surprise Box</p>
+      <h4>₹599</h4>
+      <div class="actions">
+        <button onclick="addToCart('Surprise Box',599,'g4.jpg')">Add to Cart</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast">Added to Cart 🛒</div>
+
+<!-- WISHLIST PANEL - Interflora Style Slide-out -->
+<div id="wishlistOverlay" class="wishlist-overlay"></div>
+<div id="wishlistPanel" class="wishlist-panel">
+  <div class="wishlist-header">
+    <h3>🌸 My Wishlist</h3>
+    <button class="close-wishlist" id="closeWishlistBtn">✕</button>
+  </div>
+  <div id="wishlistItemsContainer" class="wishlist-items">
+    <div class="wishlist-empty">Your wishlist is empty.<br> Add your favourite gifts ♡</div>
+  </div>
+  <div class="wishlist-footer">
+    <button id="moveAllToCartBtn" class="move-to-cart-btn">Move all to cart 🛒</button>
+  </div>
+</div>
+
+<script>
+// ---------- INTERFLORA STYLE WISHLIST SYSTEM (Fully fixed, same as index page) ----------
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function saveWishlist() {
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  updateWishlistUI();
+  updateCounts();
+}
+
+// Toggle wishlist function
+function toggleWishlist(element, name, price, image) {
+  let heartEl = element;
+  
+  // If called with parameters but element might be from data attribute
+  if (typeof element === 'string') {
+    heartEl = document.querySelector(`.heart[data-name="${element}"]`);
+    name = name || (heartEl ? heartEl.getAttribute('data-name') : null);
+    price = price || (heartEl ? parseInt(heartEl.getAttribute('data-price')) : 0);
+    image = image || (heartEl ? heartEl.getAttribute('data-img') : '');
+  }
+  
+  if (!name) return;
+  
+  const exists = wishlist.find(item => item.name === name);
+  
+  if (exists) {
+    wishlist = wishlist.filter(item => item.name !== name);
+    if (heartEl) {
+      heartEl.classList.remove("active");
+      heartEl.innerHTML = "♡";
+    }
+    showToastMessage(`✨ ${name} removed from wishlist`);
+  } else {
+    wishlist.push({ name, price, image: image || 'g1.jpg', addedAt: Date.now() });
+    if (heartEl) {
+      heartEl.classList.add("active");
+      heartEl.innerHTML = "❤️";
+    }
+    showToastMessage(`❤️ ${name} added to wishlist`);
+  }
+  
+  saveWishlist();
+}
+
+// Update all UI: heart buttons, panel content, badge counts
+function updateWishlistUI() {
+  // Update heart buttons on products
+  document.querySelectorAll(".heart").forEach(heart => {
+    const prodName = heart.getAttribute("data-name");
+    if (prodName && wishlist.some(item => item.name === prodName)) {
+      heart.classList.add("active");
+      heart.innerHTML = "❤️";
+    } else {
+      heart.classList.remove("active");
+      heart.innerHTML = "♡";
+    }
+  });
+  
+  // Update wishlist panel content
+  const container = document.getElementById("wishlistItemsContainer");
+  if (!container) return;
+  
+  if (wishlist.length === 0) {
+    container.innerHTML = `<div class="wishlist-empty">🌸 Your wishlist is empty.<br> Add your favourite gifts ♡</div>`;
+    return;
+  }
+  
+  container.innerHTML = "";
+  wishlist.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "wishlist-card";
+    card.innerHTML = `
+      <img src="${item.image || 'g1.jpg'}" alt="${item.name}" onerror="this.src='g1.jpg'">
+      <div class="wishlist-info">
+        <h4>${item.name}</h4>
+        <div class="price">₹${item.price}</div>
+      </div>
+      <button class="remove-wish" data-name="${item.name.replace(/"/g, '&quot;')}">🗑️</button>
+    `;
+    container.appendChild(card);
+  });
+  
+  // Add remove event listeners
+  document.querySelectorAll(".remove-wish").forEach(btn => {
+    btn.removeEventListener("click", removeHandler);
+    btn.addEventListener("click", removeHandler);
+  });
+}
+
+function removeHandler(e) {
+  const name = e.currentTarget.getAttribute("data-name");
+  wishlist = wishlist.filter(w => w.name !== name);
+  saveWishlist();
+  const productHeart = document.querySelector(`.heart[data-name="${name}"]`);
+  if (productHeart) {
+    productHeart.classList.remove("active");
+    productHeart.innerHTML = "♡";
+  }
+  showToastMessage(`❌ ${name} removed from wishlist`);
+}
+
+// Move all wishlist items to cart
+function moveAllToCart() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+  wishlist.forEach(item => {
+    const existing = cart.find(c => c.name === item.name);
+    if (existing) {
+      existing.qty = (existing.qty || 1) + 1;
+    } else {
+      cart.push({ name: item.name, price: item.price, image: item.image, qty: 1 });
+    }
+  });
+  
+  localStorage.setItem("cart", JSON.stringify(cart));
+  wishlist = [];
+  saveWishlist();
+  updateCounts();
+  
+  document.querySelectorAll(".heart").forEach(heart => {
+    heart.classList.remove("active");
+    heart.innerHTML = "♡";
+  });
+  
+  showToastMessage(`✨ All items moved to cart!`);
+  closeWishlistPanel();
+}
+
+// Cart functions
+function addToCart(name, price, image) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let item = cart.find(p => p.name === name);
+  
+  if (item) {
+    item.qty = (item.qty || 1) + 1;
+  } else {
+    cart.push({ name, price, image, qty: 1 });
+  }
+  
+  localStorage.setItem("cart", JSON.stringify(cart));
+  showToast();
+  updateCounts();
+}
+
+function updateCounts() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let totalCartItems = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+  let wishlistCount = wishlist.length;
+  
+  const cartBadge = document.getElementById("cart-count");
+  const wishBadge = document.getElementById("wish-count");
+  
+  if (cartBadge) cartBadge.innerText = totalCartItems;
+  if (wishBadge) wishBadge.innerText = wishlistCount;
+}
+
+// Toast notifications
+function showToast() {
+  let toast = document.getElementById("toast");
+  toast.classList.add("show");
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
+}
+
+function showToastMessage(message) {
+  let toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => {
+    toast.classList.remove("show");
+    toast.textContent = "Added to Cart 🛒";
+  }, 2000);
+}
+
+// Panel controls
+function openWishlistPanel() {
+  document.getElementById("wishlistOverlay").classList.add("open");
+  document.getElementById("wishlistPanel").classList.add("open");
+  updateWishlistUI();
+}
+
+function closeWishlistPanel() {
+  document.getElementById("wishlistOverlay").classList.remove("open");
+  document.getElementById("wishlistPanel").classList.remove("open");
+}
+
+// Bind heart button events
+function bindHeartEvents() {
+  document.querySelectorAll(".heart").forEach(heart => {
+    const newHeart = heart.cloneNode(true);
+    heart.parentNode.replaceChild(newHeart, heart);
+    
+    newHeart.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const name = newHeart.getAttribute("data-name");
+      const price = parseInt(newHeart.getAttribute("data-price"));
+      const img = newHeart.getAttribute("data-img");
+      if (name) {
+        toggleWishlist(newHeart, name, price, img);
+      }
+    });
+  });
+}
+
+// Initialize on page load
+window.onload = function() {
+  wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  
+  bindHeartEvents();
+  updateWishlistUI();
+  updateCounts();
+  
+  const openBtn = document.getElementById("openWishlistBtn");
+  if (openBtn) openBtn.addEventListener("click", openWishlistPanel);
+  
+  const closeBtn = document.getElementById("closeWishlistBtn");
+  if (closeBtn) closeBtn.addEventListener("click", closeWishlistPanel);
+  
+  const overlay = document.getElementById("wishlistOverlay");
+  if (overlay) overlay.addEventListener("click", closeWishlistPanel);
+  
+  const moveAllBtn = document.getElementById("moveAllToCartBtn");
+  if (moveAllBtn) moveAllBtn.addEventListener("click", moveAllToCart);
+  
+  // Listen for storage changes from other tabs
+  window.addEventListener("storage", (e) => {
+    if (e.key === "wishlist") {
+      wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      updateWishlistUI();
+      updateCounts();
+      bindHeartEvents();
+    }
+    if (e.key === "cart") updateCounts();
+  });
+};
+
+// Mutation observer for dynamic content
+const observer = new MutationObserver(() => {
+  bindHeartEvents();
+  updateWishlistUI();
+});
+observer.observe(document.body, { childList: true, subtree: false });
+</script>
+
+</body>
+</html>

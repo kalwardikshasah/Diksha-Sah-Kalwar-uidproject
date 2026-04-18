@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Profile - Bloomify</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* Additional profile-specific styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:#f5f5f5;
+}
+
+/* NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 40px;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(12px);
+  box-shadow:0 8px 30px rgba(0,0,0,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+  border-bottom:1px solid rgba(255,255,255,0.3);
+}
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:#ff4081;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.logo a{
+  text-decoration:none;
+  color:#ff4081;
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#333;
+  font-weight:500;
+  position:relative;
+  transition:0.3s;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  background:#ff4081;
+  left:0;
+  bottom:-5px;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#ff4081;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.search-box{
+  position:relative;
+}
+
+.search-box input{
+  width:120px;
+  padding:8px 35px 8px 12px;
+  border-radius:20px;
+  border:1px solid #ddd;
+  outline:none;
+  transition:0.4s;
+}
+
+.search-box input:focus{
+  width:200px;
+  border-color:#ff4081;
+}
+
+.search-icon{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:14px;
+}
+
+.icon{
+  position:relative;
+  font-size:22px;
+  color:#333;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.icon:hover{
+  color:#ff4081;
+  transform:scale(1.2);
+}
+
+.badge{
+  position:absolute;
+  top:-6px;
+  right:-10px;
+  background:#ff4081;
+  color:white;
+  font-size:10px;
+  padding:2px 6px;
+  border-radius:50%;
+}
+
+.menu-toggle{
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+}
+
+/* PROFILE */
+.profile-container{
+  display:flex;
+  gap:25px;
+  padding:30px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+/* LEFT */
+.profile-left{
+  width:30%;
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.avatar{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#ff4081,#ff80ab);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  margin:auto;
+  box-shadow:0 5px 15px rgba(255,64,129,0.3);
+}
+
+.action-buttons{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:20px;
+}
+
+.action-btn{
+  padding:12px 20px;
+  border:none;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+  width:100%;
+  font-family:Poppins;
+}
+
+.edit-btn{ 
+  background:linear-gradient(135deg,#ff4081,#ff80ab);
+  color:white; 
+}
+
+.edit-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(255,64,129,0.4);
+}
+
+.login-btn{
+  background:linear-gradient(135deg,#4CAF50,#66bb6a);
+  color:white;
+}
+
+.login-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(76,175,80,0.4);
+}
+
+.logout-btn{
+  background:linear-gradient(135deg,#f44336,#ef5350);
+  color:white;
+}
+
+.logout-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(244,67,54,0.4);
+}
+
+.save-btn{ 
+  background:linear-gradient(135deg,#4CAF50,#66bb6a);
+  color:white; 
+  display:none;
+  margin-top:12px;
+  padding:12px 20px;
+  border:none;
+  border-radius:30px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  width:100%;
+}
+
+/* RIGHT */
+.profile-right{
+  width:70%;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  margin-bottom:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.card h3{
+  color:#ff4081;
+  margin-bottom:15px;
+  font-size:20px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:10px;
+  border:1px solid #ddd;
+  font-family:Poppins;
+  font-size:14px;
+}
+
+input:focus{
+  outline:none;
+  border-color:#ff4081;
+  box-shadow:0 0 0 2px rgba(255,64,129,0.1);
+}
+
+.info-text{
+  margin:10px 0;
+  color:#555;
+  font-size:15px;
+  padding:5px 0;
+  border-bottom:1px solid #f0f0f0;
+}
+
+.info-text strong{
+  color:#333;
+  width:80px;
+  display:inline-block;
+}
+
+.order{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 0;
+  border-bottom:1px solid #eee;
+}
+
+.order p{
+  margin:0;
+  font-weight:500;
+}
+
+.order span{
+  color:#ff4081;
+  font-size:13px;
+  background:#ffe4ec;
+  padding:3px 12px;
+  border-radius:20px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  color:#777;
+  font-size:14px;
+}
+
+/* MODAL STYLES */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+  color: #ff4081;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content input {
+  margin-bottom: 15px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: Poppins;
+}
+
+.login-modal-btn {
+  background: linear-gradient(135deg,#ff4081,#ff80ab);
+  color: white;
+}
+
+.close-modal {
+  background: #f0f0f0;
+  color: #666;
+  margin-top: 10px;
+}
+
+.error-msg {
+  color: #f44336;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: left;
+  padding-left: 5px;
+}
+
+/* mobile responsive */
+@media(max-width:768px){
+  .navbar{
+    flex-wrap:wrap;
+    padding:12px 20px;
+  }
+  .nav-links{
+    position:absolute;
+    top:65px;
+    left:0;
+    width:100%;
+    background:white;
+    flex-direction:column;
+    align-items:center;
+    padding:20px;
+    display:none;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+    z-index:999;
+  }
+  .nav-links.active{
+    display:flex;
+  }
+  .menu-toggle{
+    display:block;
+  }
+  .search-box{
+    display:none;
+  }
+  .profile-container{
+    flex-direction:column;
+    padding:20px;
+    gap:20px;
+  }
+  .profile-left{
+    width:100%;
+  }
+  .profile-right{
+    width:100%;
+  }
+  .avatar{
+    width:80px;
+    height:80px;
+    font-size:28px;
+  }
+  .action-btn{
+    padding:10px 16px;
+    font-size:13px;
+  }
+  .card{
+    padding:18px;
+  }
+}
+
+@media(max-width:480px){
+  .logo{
+    font-size:18px;
+  }
+  .icon{
+    font-size:18px;
+  }
+  .avatar{
+    width:70px;
+    height:70px;
+    font-size:24px;
+  }
+  .action-btn{
+    padding:8px 14px;
+    font-size:12px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo"><a href="index.html">🌸 Bloomify</a></div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <nav class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="Occassion.html">Occasions</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <div class="search-box">
+      <input type="text" placeholder="Search...">
+      <span class="search-icon">🔍</span>
+    </div>
+    <a href="wishlist.html" class="icon">
+      ♡
+      <span class="badge" id="wish-count">0</span>
+    </a>
+    <a href="cart.html" class="icon">
+      🛒
+      <span class="badge" id="cart-count">0</span>
+    </a>
+    <a href="profile.html" class="icon">👤</a>
+  </div>
+</header>
+
+<section class="profile-container">
+  <!-- LEFT PANEL -->
+  <div class="profile-left">
+    <div class="avatar" id="avatar">G</div>
+    <h2 id="nameText">Guest User</h2>
+    <p id="emailText" style="color:#888; font-size:14px;"></p>
+
+    <div class="action-buttons">
+      <button class="action-btn edit-btn" onclick="enableEdit()">✏️ Edit Profile</button>
+      <button class="action-btn login-btn" onclick="openLoginModal()">🔐 Login</button>
+      <button class="action-btn logout-btn" onclick="logout()">🚪 Sign Out</button>
+    </div>
+    
+    <button class="save-btn" id="saveBtn" onclick="saveProfile()">💾 Save Changes</button>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="profile-right">
+    <div class="card">
+      <h3>📋 Personal Information</h3>
+      <div id="viewMode">
+        <p class="info-text"><strong>Name:</strong> <span id="vName"></span></p>
+        <p class="info-text"><strong>Email:</strong> <span id="vEmail"></span></p>
+        <p class="info-text"><strong>Phone:</strong> <span id="vPhone"></span></p>
+        <p class="info-text"><strong>Address:</strong> <span id="vAddress"></span></p>
+      </div>
+      <div id="editMode" style="display:none;">
+        <input type="text" id="editName" placeholder="Full Name">
+        <input type="email" id="editEmail" placeholder="Email Address">
+        <input type="text" id="editPhone" placeholder="Phone Number">
+        <input type="text" id="editAddress" placeholder="Delivery Address">
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>📦 Recent Orders</h3>
+      <div class="order"><p>🌸 Rose Bouquet</p><span>Delivered</span></div>
+      <div class="order"><p>🎁 Gift Combo</p><span>Shipped</span></div>
+      <div class="order"><p>💐 Mixed Flowers</p><span>Processing</span></div>
+      <div class="order"><a href="order.html" style="color:#ff4081; text-decoration:none; font-size:13px;">View All Orders →</a></div>
+    </div>
+    
+    <div class="card">
+      <h3>🔗 Quick Links</h3>
+      <div class="order"><a href="checkout.html" style="color:#333; text-decoration:none;">🛍️ Checkout</a></div>
+      <div class="order"><a href="payment.html" style="color:#333; text-decoration:none;">💳 Payment Methods</a></div>
+      <div class="order"><a href="delivery.html" style="color:#333; text-decoration:none;">🚚 Delivery Info</a></div>
+      <div class="order"><a href="wishlist.html" style="color:#333; text-decoration:none;">❤️ My Wishlist</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Bloomify | Made with ❤️ | <a href="about.html" style="color:#ff4081; text-decoration:none;">About Us</a> | <a href="contact.html" style="color:#ff4081; text-decoration:none;">Contact</a></footer>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <h2>🔐 Login to Bloomify</h2>
+    <input type="email" id="loginEmail" placeholder="Email Address (Gmail only)" value="">
+    <div id="emailError" class="error-msg"></div>
+    <input type="password" id="loginPassword" placeholder="Password (min. 6 characters)">
+    <div id="passError" class="error-msg"></div>
+    <button class="login-modal-btn" onclick="performSecureLogin()">Login</button>
+    <button class="close-modal" onclick="closeLoginModal()">Cancel</button>
+    <p style="text-align:center; margin-top:15px; font-size:12px;">Don't have an account? <a href="login.html" style="color:#ff4081;">Sign up</a></p>
+  </div>
+</div>
+
+<script>
+// FIXED PROFILE for Diksha Kalwar (valid gmail)
+const VALID_EMAIL = "kalwardikshasah@gmail.com";
+const FIXED_PROFILE = {
+  name: "Diksha Kalwar",
+  email: VALID_EMAIL,
+  phone: "+91 90000 00000",
+  address: "Chennai, Tamil Nadu"
+};
+
+// Helper: Validate Gmail address (must end with @gmail.com and not empty)
+function isValidGmail(email) {
+  if (!email || typeof email !== 'string') return false;
+  const trimmed = email.trim().toLowerCase();
+  const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+  return regex.test(trimmed);
+}
+
+// Validate password length (min 6 chars)
+function isValidPassword(pwd) {
+  return pwd && pwd.trim().length >= 6;
+}
+
+function initProfile() {
+  if (!localStorage.getItem("savedProfileName")) {
+    localStorage.setItem("savedProfileName", FIXED_PROFILE.name);
+    localStorage.setItem("savedProfileEmail", FIXED_PROFILE.email);
+    localStorage.setItem("savedProfilePhone", FIXED_PROFILE.phone);
+    localStorage.setItem("savedProfileAddress", FIXED_PROFILE.address);
+  }
+  if (localStorage.getItem("isLoggedIn") === null) {
+    localStorage.setItem("isLoggedIn", "false");
+  }
+}
+
+function isLoggedIn() {
+  return localStorage.getItem("isLoggedIn") === "true";
+}
+
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("active");
+}
+
+function updateCounts(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  let cartTotal = 0;
+  for(let i = 0; i < cart.length; i++) {
+    cartTotal += (cart[i].qty || 1);
+  }
+  const cartBadge = document.getElementById("cart-count");
+  const wishBadge = document.getElementById("wish-count");
+  if(cartBadge) cartBadge.innerText = cartTotal;
+  if(wishBadge) wishBadge.innerText = wishlist.length;
+}
+
+function showToast(message, isError = false) {
+  let toast = document.getElementById("profile-toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "profile-toast";
+    toast.style.position = "fixed";
+    toast.style.bottom = "20px";
+    toast.style.left = "50%";
+    toast.style.transform = "translateX(-50%)";
+    toast.style.backgroundColor = "#333";
+    toast.style.color = "white";
+    toast.style.padding = "10px 20px";
+    toast.style.borderRadius = "25px";
+    toast.style.fontSize = "14px";
+    toast.style.zIndex = "9999";
+    toast.style.fontFamily = "Poppins, sans-serif";
+    toast.style.opacity = "0";
+    toast.style.transition = "opacity 0.3s ease";
+    document.body.appendChild(toast);
+  }
+  if(isError) {
+    toast.style.backgroundColor = "#d32f2f";
+  } else {
+    toast.style.backgroundColor = "#333";
+  }
+  toast.textContent = message;
+  toast.style.opacity = "1";
+  setTimeout(() => {
+    toast.style.opacity = "0";
+  }, 2500);
+}
+
+function loadProfile(){
+  initProfile();
+  const loggedIn = isLoggedIn();
+  
+  let name, email, phone, address;
+  
+  if (loggedIn) {
+    name = localStorage.getItem("savedProfileName") || FIXED_PROFILE.name;
+    email = localStorage.getItem("savedProfileEmail") || FIXED_PROFILE.email;
+    phone = localStorage.getItem("savedProfilePhone") || FIXED_PROFILE.phone;
+    address = localStorage.getItem("savedProfileAddress") || FIXED_PROFILE.address;
+  } else {
+    name = "Guest User";
+    email = "";
+    phone = "";
+    address = "";
+  }
+
+  document.getElementById("nameText").innerText = name;
+  document.getElementById("emailText").innerText = email;
+  
+  let avatarLetter = name !== "Guest User" ? name.charAt(0).toUpperCase() : "G";
+  document.getElementById("avatar").innerText = avatarLetter;
+
+  document.getElementById("vName").innerText = name;
+  document.getElementById("vEmail").innerText = email;
+  document.getElementById("vPhone").innerText = phone;
+  document.getElementById("vAddress").innerText = address;
+
+  document.getElementById("editName").value = localStorage.getItem("savedProfileName") || FIXED_PROFILE.name;
+  document.getElementById("editEmail").value = localStorage.getItem("savedProfileEmail") || FIXED_PROFILE.email;
+  document.getElementById("editPhone").value = localStorage.getItem("savedProfilePhone") || FIXED_PROFILE.phone;
+  document.getElementById("editAddress").value = localStorage.getItem("savedProfileAddress") || FIXED_PROFILE.address;
+}
+
+function enableEdit(){
+  if(!isLoggedIn()){
+    showToast("⚠️ Please login to edit profile!", true);
+    return;
+  }
+  document.getElementById("viewMode").style.display = "none";
+  document.getElementById("editMode").style.display = "block";
+  document.getElementById("saveBtn").style.display = "block";
+}
+
+function saveProfile(){
+  if(!isLoggedIn()){
+    showToast("❌ You need to login first!", true);
+    return;
+  }
+  let newName = document.getElementById("editName").value.trim();
+  let newEmail = document.getElementById("editEmail").value.trim();
+  let newPhone = document.getElementById("editPhone").value.trim();
+  let newAddress = document.getElementById("editAddress").value.trim();
+
+  if(newName === "") newName = FIXED_PROFILE.name;
+  
+  if(newEmail && !isValidGmail(newEmail)) {
+    showToast("❌ Only Gmail addresses (@gmail.com) are allowed!", true);
+    return;
+  }
+  if(newEmail === "") newEmail = FIXED_PROFILE.email;
+  
+  localStorage.setItem("savedProfileName", newName);
+  localStorage.setItem("savedProfileEmail", newEmail);
+  localStorage.setItem("savedProfilePhone", newPhone);
+  localStorage.setItem("savedProfileAddress", newAddress);
+
+  loadProfile();
+
+  document.getElementById("viewMode").style.display = "block";
+  document.getElementById("editMode").style.display = "none";
+  document.getElementById("saveBtn").style.display = "none";
+  
+  showToast("Profile saved successfully! ✅");
+}
+
+function openLoginModal() {
+  document.getElementById("loginEmail").value = "";
+  document.getElementById("loginPassword").value = "";
+  document.getElementById("emailError").innerText = "";
+  document.getElementById("passError").innerText = "";
+  document.getElementById("loginModal").style.display = "block";
+}
+
+function closeLoginModal() {
+  document.getElementById("loginModal").style.display = "none";
+}
+
+function performSecureLogin() {
+  const emailInput = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  
+  let isValid = true;
+  document.getElementById("emailError").innerText = "";
+  document.getElementById("passError").innerText = "";
+  
+  if (!isValidGmail(emailInput)) {
+    document.getElementById("emailError").innerText = "❌ Please enter a valid Gmail address (example@gmail.com)";
+    isValid = false;
+  }
+  
+  if (!isValidPassword(password)) {
+    document.getElementById("passError").innerText = "❌ Password must be at least 6 characters long";
+    isValid = false;
+  }
+  
+  if (!isValid) {
+    return;
+  }
+  
+  if (emailInput.toLowerCase() === VALID_EMAIL.toLowerCase()) {
+    localStorage.setItem("savedProfileName", FIXED_PROFILE.name);
+    localStorage.setItem("savedProfileEmail", FIXED_PROFILE.email);
+    localStorage.setItem("savedProfilePhone", FIXED_PROFILE.phone);
+    localStorage.setItem("savedProfileAddress", FIXED_PROFILE.address);
+  } else {
+    const nameFromEmail = emailInput.split('@')[0];
+    const formattedName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
+    localStorage.setItem("savedProfileName", formattedName);
+    localStorage.setItem("savedProfileEmail", emailInput);
+    localStorage.setItem("savedProfilePhone", "");
+    localStorage.setItem("savedProfileAddress", "");
+  }
+  
+  localStorage.setItem("isLoggedIn", "true");
+  
+  closeLoginModal();
+  loadProfile();
+  showToast(`✅ Welcome ${localStorage.getItem("savedProfileName")}!`);
+  
+  // Redirect to index after 1 second (as requested: login ke baad index page)
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 1000);
+}
+
+function logout() {
+  if(confirm("Are you sure you want to sign out?")) {
+    localStorage.setItem("isLoggedIn", "false");
+    loadProfile();
+    showToast("Signed out! Now viewing as Guest User 👋");
+  }
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById("loginModal");
+  if (event.target === modal) {
+    closeLoginModal();
+  }
+}
+
+window.onload = function() {
+  initProfile();
+  loadProfile();
+  updateCounts();
+  
+  window.addEventListener("storage", function(e) {
+    if (e.key === "cart" || e.key === "wishlist") {
+      updateCounts();
+    }
+  });
+};
+</script>
+</body>
+</html>

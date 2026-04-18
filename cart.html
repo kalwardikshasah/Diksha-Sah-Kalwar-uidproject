@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart - Bloomify</title>
+
+<style>
+body{
+  font-family:Poppins;
+  background:#fff0f5;
+  margin:0;
+}
+
+header{
+  padding:15px 40px;
+  background:#ffe4ec;
+  color:#ff4081;
+  font-weight:bold;
+}
+
+.container{
+  display:flex;
+  gap:30px;
+  padding:40px;
+  flex-wrap:wrap;
+}
+
+.cart-items{
+  flex:2;
+}
+
+.item{
+  display:flex;
+  gap:20px;
+  background:white;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:15px;
+  align-items:center;
+  box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.item img{
+  width:100px;
+  height:100px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.price{
+  color:#ff4081;
+  font-weight:bold;
+}
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.qty button{
+  padding:5px 10px;
+  border:none;
+  background:#ff4081;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.remove{
+  margin-left:auto;
+  background:#ddd;
+  border:none;
+  padding:5px 10px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.summary{
+  flex:1;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  height:fit-content;
+  box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.total{
+  font-size:20px;
+  font-weight:bold;
+  color:#ff4081;
+}
+
+.checkout{
+  margin-top:20px;
+  width:100%;
+  padding:10px;
+  border:none;
+  background:#ff4081;
+  color:white;
+  border-radius:20px;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>🛒 Your Cart</header>
+
+<div class="container">
+
+  <div class="cart-items" id="cart-items"></div>
+
+  <div class="summary">
+    <h3>Order Summary</h3>
+    <p>Total Items: <span id="total-items">0</span></p>
+    <p class="total">Total: ₹<span id="total-price">0</span></p>
+
+    <a href="checkout.html">
+      <button class="checkout">Checkout</button>
+    </a>
+  </div>
+
+</div>
+
+<script>
+
+// ⚠️ IMPORTANT: Clear old wrong data once
+if(!localStorage.getItem("fixed")){
+  localStorage.removeItem("cart");
+  localStorage.setItem("fixed", true);
+}
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let container = document.getElementById("cart-items");
+
+function renderCart(){
+  container.innerHTML = "";
+  let total = 0;
+
+  if(cart.length === 0){
+    container.innerHTML = "<p>Your cart is empty 😔</p>";
+    document.getElementById("total-items").innerText = 0;
+    document.getElementById("total-price").innerText = 0;
+    return;
+  }
+
+  cart.forEach((item, index)=>{
+
+    // 🔥 FIX: default values agar missing ho
+    let name = item.name || "No Name";
+    let price = Number(item.price) || 0;
+    let image = item.image || "default.jpg";
+    let qty = item.qty || 1;
+
+    total += price * qty;
+
+    container.innerHTML += `
+      <div class="item">
+        <img src="${image}">
+        <div>
+          <h3>${name}</h3>
+          <p class="price">₹${price}</p>
+
+          <div class="qty">
+            <button onclick="decrease(${index})">-</button>
+            <span>${qty}</span>
+            <button onclick="increase(${index})">+</button>
+          </div>
+        </div>
+
+        <button class="remove" onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total-items").innerText = cart.length;
+  document.getElementById("total-price").innerText = total;
+}
+
+// ➕
+function increase(index){
+  cart[index].qty = (cart[index].qty || 1) + 1;
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+// ➖
+function decrease(index){
+  if(cart[index].qty > 1){
+    cart[index].qty--;
+  }
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+// ❌ REMOVE
+function removeItem(index){
+  cart.splice(index,1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+}
+
+renderCart();
+</script>
+
+</body>
+</html>

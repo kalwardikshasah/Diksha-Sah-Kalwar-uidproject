@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - Bloomify</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:linear-gradient(to right,#fff0f5,#ffe4ec);
+}
+
+/* 🌸 NAVBAR */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  background:rgba(255,255,255,0.8);
+  backdrop-filter:blur(12px);
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:700;
+  color:#ff4081;
+}
+
+nav{
+  display:flex;
+  gap:25px;
+}
+
+nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:500;
+  position:relative;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  background:#ff4081;
+  bottom:-5px;
+  left:0;
+  transition:0.3s;
+}
+
+nav a:hover::after{
+  width:100%;
+}
+
+/* RIGHT ICONS */
+.nav-icons{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.search{
+  padding:8px 12px;
+  border-radius:20px;
+  border:1px solid #ddd;
+}
+
+.icon{
+  position:relative;
+  font-size:22px;
+  text-decoration:none;
+  color:#333;
+  transition:0.3s;
+}
+
+.icon:hover{
+  color:#ff4081;
+  transform:scale(1.2);
+}
+
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-10px;
+  background:#ff4081;
+  color:white;
+  font-size:11px;
+  padding:2px 6px;
+  border-radius:50%;
+}
+
+/* 🌸 CONTACT SECTION */
+.contact-container{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  padding:60px;
+}
+
+/* LEFT INFO */
+.contact-info{
+  background:rgba(255,255,255,0.8);
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.contact-info h2{
+  color:#ff4081;
+  margin-bottom:10px;
+}
+
+.contact-info p{
+  margin:12px 0;
+  font-size:15px;
+}
+
+/* FORM */
+.contact-form{
+  background:rgba(255,255,255,0.9);
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.contact-form h2{
+  color:#ff4081;
+  margin-bottom:15px;
+}
+
+.contact-form input,
+.contact-form textarea{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border-radius:12px;
+  border:1px solid #ddd;
+  outline:none;
+  transition:0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color:#ff4081;
+  box-shadow:0 0 5px rgba(255,64,129,0.3);
+}
+
+/* BUTTON */
+.contact-form button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(to right,#ff4081,#ff80ab);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.contact-form button:hover{
+  transform:scale(1.05);
+}
+
+/* MAP */
+.map{
+  margin:40px 60px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:14px;
+  border-radius:50%;
+  text-decoration:none;
+  font-size:22px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  color:#555;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .contact-container{
+    grid-template-columns:1fr;
+    padding:20px;
+  }
+
+  header{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .map{
+    margin:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🌸 HEADER -->
+<header>
+
+  <div class="logo">🌸 Bloomify</div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="Occassion.html">Occasions</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <div class="nav-icons">
+    <input type="text" placeholder="Search..." class="search">
+
+    <a href="wishlist.html" class="icon">♡
+      <span id="wish-count" class="badge">0</span>
+    </a>
+
+    <a href="cart.html" class="icon">🛒
+      <span id="cart-count" class="badge">0</span>
+    </a>
+  </div>
+
+</header>
+
+<!-- 🌸 CONTACT -->
+<section class="contact-container">
+
+  <div class="contact-info">
+    <h2>Get in Touch 💌</h2>
+    <p>We’d love to hear from you!</p>
+
+    <p>📍 Chennai, India</p>
+    <p>📞 +91 00000 00000</p>
+    <p>📧 bloomify@gmail.com</p>
+  </div>
+
+  <div class="contact-form">
+    <h2>Send Message</h2>
+
+    <input type="text" placeholder="Your Name">
+    <input type="email" placeholder="Your Email">
+    <textarea rows="5" placeholder="Your Message"></textarea>
+
+    <button onclick="sendMessage()">Send Message</button>
+  </div>
+
+</section>
+
+<!-- 🌍 MAP -->
+<div class="map">
+  <iframe 
+    src="https://maps.google.com/maps?q=chennai&t=&z=13&ie=UTF8&iwloc=&output=embed"
+    width="100%" 
+    height="300"
+    style="border:0;">
+  </iframe>
+</div>
+
+<!-- 💬 WHATSAPP -->
+<a href="https://wa.me/919876543210" class="whatsapp">💬</a>
+
+<!-- 🌸 FOOTER -->
+<footer>
+  © 2026 Bloomify | Made with ❤️
+</footer>
+
+<script>
+
+/* ---------- WISHLIST COUNT FIX ---------- */
+function updateWishlistCount(){
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  let wishCount = document.getElementById("wish-count");
+
+  if(wishCount){
+    wishCount.textContent = wishlist.length;
+  }
+}
+
+/* ---------- CART COUNT FIX ---------- */
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  let total = cart.reduce((sum,item)=>{
+    return sum + (item.qty || 1);
+  },0);
+
+  let cartCount = document.getElementById("cart-count");
+
+  if(cartCount){
+    cartCount.textContent = total;
+  }
+}
+
+/* ---------- AUTO UPDATE ON PAGE LOAD ---------- */
+window.addEventListener("load",()=>{
+  updateWishlistCount();
+  updateCartCount();
+});
+
+/* ---------- SYNC BETWEEN PAGES ---------- */
+window.addEventListener("storage",(e)=>{
+  if(e.key === "wishlist"){
+    updateWishlistCount();
+  }
+  if(e.key === "cart"){
+    updateCartCount();
+  }
+});
+
+/* ---------- EXTRA FIX (FOR SAME TAB UPDATE) ---------- */
+setInterval(()=>{
+  updateWishlistCount();
+  updateCartCount();
+},500);
+
+
+
+function sendMessage(){
+  alert("Message Sent Successfully 💌");
+}
+</script>
+
+</body>
+</html>

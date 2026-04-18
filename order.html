@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Orders</title>
+
+<style>
+body{
+  font-family:Poppins;
+  background:#fff0f5;
+  padding:40px;
+}
+
+.item{
+  background:white;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>📦 Your Orders</h2>
+
+<div id="orders"></div>
+
+<script>
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+let div = document.getElementById("orders");
+
+if(orders.length === 0){
+  div.innerHTML = "No orders yet 😢";
+}else{
+  orders.forEach(o=>{
+    div.innerHTML += `<div class="item">${o}</div>`;
+  });
+}
+</script>
+
+</body>
+</html>

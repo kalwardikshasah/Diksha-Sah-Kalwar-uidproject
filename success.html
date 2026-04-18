@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Order Success - Bloomify</title>
+
+<style>
+body{
+  font-family:Poppins;
+  background:#fff0f5;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+}
+
+.box{
+  background:white;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  width:350px;
+}
+
+h1{
+  color:#ff4081;
+}
+
+.details{
+  margin-top:15px;
+  text-align:left;
+  font-size:14px;
+}
+
+a{
+  display:inline-block;
+  margin-top:20px;
+  text-decoration:none;
+  background:#ff4081;
+  color:white;
+  padding:10px 20px;
+  border-radius:20px;
+}
+
+/* simple animation */
+.box{
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop{
+  from{
+    transform: scale(0.8);
+    opacity:0;
+  }
+  to{
+    transform: scale(1);
+    opacity:1;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h1>🎉 Order Placed!</h1>
+  <p>Your flowers will be delivered soon 🌸</p>
+
+  <div class="details">
+    <p><b>Order ID:</b> <span id="orderId"></span></p>
+    <p><b>Name:</b> <span id="name"></span></p>
+    <p><b>Total:</b> ₹<span id="total"></span></p>
+    <p><b>Date:</b> <span id="date"></span></p>
+  </div>
+
+  <a href="index.html">Continue Shopping</a>
+</div>
+
+<script>
+let order = JSON.parse(localStorage.getItem("lastOrder"));
+
+// generate random order id
+let orderId = "BLM" + Math.floor(Math.random()*100000);
+
+// date
+let today = new Date().toLocaleString();
+
+if(order){
+  document.getElementById("name").innerText = order.name;
+  document.getElementById("total").innerText = order.total;
+}
+
+document.getElementById("orderId").innerText = orderId;
+document.getElementById("date").innerText = today;
+</script>
+
+</body>
+</html>
