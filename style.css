@@ -304,7 +304,7 @@ h2.section-title{
   border-radius:20px;
   overflow:hidden;
   position:relative;
-  background:url('slide.jpg') no-repeat center/cover;
+  background:url('image/slide.jpg') no-repeat center/cover;
 
   display:flex;
   flex-direction:column;
