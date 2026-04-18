@@ -673,47 +673,47 @@ footer p {
 
 <!-- PRODUCTS GRID -->
 <div class="products">
-  <div class="card" data-name="Rose Box" data-price="899" data-img="a1.jpg">
-    <span class="heart" data-name="Rose Box" data-price="899" data-img="a1.jpg">♡</span>
-    <img src="a1.jpg" alt="Rose Box">
+  <div class="card" data-name="Rose Box" data-price="899" data-img="image/a1.jpg">
+    <span class="heart" data-name="Rose Box" data-price="899" data-img="image/a1.jpg">♡</span>
+    <img src="image/a1.jpg" alt="Rose Box">
     <div class="card-content">
       <h3>Rose Box</h3>
       <p class="desc">Elegant red roses in a premium box</p>
       <p class="price">₹899</p>
-      <button class="add-btn" onclick="addToCart('Rose Box', 899, 'a1.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('Rose Box', 899, 'image/a1.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 
-  <div class="card" data-name="Couple Gift" data-price="1299" data-img="a2.jpg">
-    <span class="heart" data-name="Couple Gift" data-price="1299" data-img="a2.jpg">♡</span>
-    <img src="a2.jpg" alt="Couple Gift">
+  <div class="card" data-name="Couple Gift" data-price="1299" data-img="image/a2.jpg">
+    <span class="heart" data-name="Couple Gift" data-price="1299" data-img="image/a2.jpg">♡</span>
+    <img src="image/a2.jpg" alt="Couple Gift">
     <div class="card-content">
       <h3>Couple Gift</h3>
       <p class="desc">Perfect gift for couples</p>
       <p class="price">₹1299</p>
-      <button class="add-btn" onclick="addToCart('Couple Gift', 1299, 'a2.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('Couple Gift', 1299, 'image/a2.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 
-  <div class="card" data-name="Heart Cake" data-price="699" data-img="a3.jpg">
-    <span class="heart" data-name="Heart Cake" data-price="699" data-img="a3.jpg">♡</span>
-    <img src="a3.jpg" alt="Heart Cake">
+  <div class="card" data-name="Heart Cake" data-price="699" data-img="image/a3.jpg">
+    <span class="heart" data-name="Heart Cake" data-price="699" data-img="image/a3.jpg">♡</span>
+    <img src="image/a3.jpg" alt="Heart Cake">
     <div class="card-content">
       <h3>Heart Cake</h3>
       <p class="desc">Delicious heart-shaped cake</p>
       <p class="price">₹699</p>
-      <button class="add-btn" onclick="addToCart('Heart Cake', 699, 'a3.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('Heart Cake', 699, 'image/a3.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 
-  <div class="card" data-name="Photo Frame" data-price="599" data-img="a4.jpg">
-    <span class="heart" data-name="Photo Frame" data-price="599" data-img="a4.jpg">♡</span>
-    <img src="a4.jpg" alt="Photo Frame">
+  <div class="card" data-name="Photo Frame" data-price="599" data-img="image/a4.jpg">
+    <span class="heart" data-name="Photo Frame" data-price="599" data-img="image/a4.jpg">♡</span>
+    <img src="image/a4.jpg" alt="Photo Frame">
     <div class="card-content">
       <h3>Photo Frame</h3>
       <p class="desc">Personalized photo frame</p>
       <p class="price">₹599</p>
-      <button class="add-btn" onclick="addToCart('Photo Frame', 599, 'a4.jpg')">Add to Cart 🛒</button>
+      <button class="add-btn" onclick="addToCart('Photo Frame', 599, 'image/a4.jpg')">Add to Cart 🛒</button>
     </div>
   </div>
 </div>
@@ -795,7 +795,7 @@ function updateWishlistUI() {
     const card = document.createElement("div");
     card.className = "wishlist-card";
     card.innerHTML = `
-      <img src="${item.image || 'a1.jpg'}" alt="${item.name}">
+      <img src="${item.image || 'image/a1.jpg'}" alt="${item.name}">
       <div class="wishlist-info">
         <h4>${item.name}</h4>
         <div class="price">₹${item.price}</div>
