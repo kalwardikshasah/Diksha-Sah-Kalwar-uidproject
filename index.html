@@ -448,30 +448,6 @@
         <input class="search" placeholder="Search flowers...">
         <input type="text" id="searchInput" onkeyup="searchProduct()" placeholder="Search products...">
 
-<p id="noResult" style="display:none;">No products found</p>
-
-<div class="product" data-name="rose basket">Rose Basket</div>
-<div class="product" data-name="pink bouquet">Pink Bouquet</div>
-<div class="product" data-name="mixed flowers">Mixed Flowers</div>
-<div class="product" data-name="rose box">Rose Box</div>
-<div class="product" data-name="couple gift">Couple Gift</div>
-<div class="product" data-name="heart cake">Heart Cake</div>
-<div class="product" data-name="photo frame">Photo Frame</div>
-<div class="product" data-name="rose bouquet">Rose Bouquet</div>
-<div class="product" data-name="gift hamper">Gift Hamper</div>
-<div class="product" data-name="teddy bear">Teddy Bear</div>
-<div class="product" data-name="chocolate cake">Chocolate Cake</div>
-<div class="product" data-name="chocolate box">Chocolate Box</div>
-<div class="product" data-name="couple teddy">Couple Teddy</div>
-<div class="product" data-name="love frame">Love Frame</div>
-<div class="product" data-name="red rose">Red Rose</div>
-<div class="product" data-name="mixed bouquet">Mixed Bouquet</div>
-<div class="product" data-name="flower chocolate">Flower + Chocolate</div>
-<div class="product" data-name="sympathy flower">Sympathy Flower</div>
-<div class="product" data-name="white lily bouquet">White Lily Bouquet</div>
-<div class="product" data-name="peace roses">Peace Roses</div>
-<div class="product" data-name="white orchids">White Orchids</div>
-<div class="product" data-name="mixed flower bouquet">Mixed Flower Bouquet</div>
 
         <div class="icons">
             <!-- ❤️ WISHLIST with dynamic count -->
@@ -626,26 +602,6 @@
 </footer>
 
 <script>
-
-function searchProduct() {
-    let input = document.getElementById("searchInput").value.toLowerCase().trim();
-
-    let products = document.querySelectorAll(".product");
-    let found = false;
-
-    products.forEach(product => {
-        let name = product.getAttribute("data-name").toLowerCase();
-
-        if (name.includes(input)) {
-            product.style.display = "block";
-            found = true;
-        } else {
-            product.style.display = "none";
-        }
-    });
-
-    document.getElementById("noResult").style.display = found ? "none" : "block";
-}
     
     // ---------- WISHLIST FUNCTIONALITY (FIXED) ----------
     // toggleWishlist: adds or removes items from wishlist, updates UI and counter
