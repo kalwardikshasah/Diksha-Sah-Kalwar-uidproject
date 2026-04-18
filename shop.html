@@ -666,40 +666,40 @@ nav a:hover::after{
 <!-- 🌸 PRODUCTS -->
 <section class="products">
 
-  <div class="product-card" data-name="Red Roses" data-price="999" data-img="s1.jpg">
-    <span class="heart" data-name="Red Roses" data-price="999" data-img="s1.jpg">♡</span>
-    <img src="s1.jpg" alt="Red Roses">
+  <div class="product-card" data-name="Red Roses" data-price="999" data-img="image/s1.jpg">
+    <span class="heart" data-name="Red Roses" data-price="999" data-img="image/s1.jpg">♡</span>
+    <img src="image/s1.jpg" alt="Red Roses">
     <h3>Red Roses</h3>
     <p>Perfect for love</p>
     <p class="price">₹999</p>
-    <button class="btn" onclick="addToCart('Red Roses',999,'s1.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Red Roses',999,'image/s1.jpg')">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-name="Mixed Bouquet" data-price="799" data-img="s2.jpg">
-    <span class="heart" data-name="Mixed Bouquet" data-price="799" data-img="s2.jpg">♡</span>
-    <img src="s2.jpg" alt="Mixed Bouquet">
+  <div class="product-card" data-name="Mixed Bouquet" data-price="799" data-img="image/s2.jpg">
+    <span class="heart" data-name="Mixed Bouquet" data-price="799" data-img="image/s2.jpg">♡</span>
+    <img src="image/s2.jpg" alt="Mixed Bouquet">
     <h3>Mixed Bouquet</h3>
     <p>Bright & colorful</p>
     <p class="price">₹799</p>
-    <button class="btn" onclick="addToCart('Mixed Bouquet',799,'s2.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Mixed Bouquet',799,'image/s2.jpg')">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-name="Flower + Chocolate" data-price="1299" data-img="s3.jpg">
-    <span class="heart" data-name="Flower + Chocolate" data-price="1299" data-img="s3.jpg">♡</span>
-    <img src="s3.jpg" alt="Flower + Chocolate">
+  <div class="product-card" data-name="Flower + Chocolate" data-price="1299" data-img="image/s3.jpg">
+    <span class="heart" data-name="Flower + Chocolate" data-price="1299" data-img="image/s3.jpg">♡</span>
+    <img src="image/s3.jpg" alt="Flower + Chocolate">
     <h3>Flower + Chocolate</h3>
     <p>Sweet surprise</p>
     <p class="price">₹1299</p>
-    <button class="btn" onclick="addToCart('Flower + Chocolate',1299,'s3.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Flower + Chocolate',1299,'image/s3.jpg')">Add to Cart</button>
   </div>
 
-  <div class="product-card" data-name="Sympathy Flowers" data-price="699" data-img="s4.jpg">
-    <span class="heart" data-name="Sympathy Flowers" data-price="699" data-img="s4.jpg">♡</span>
-    <img src="s4.jpg" alt="Sympathy Flowers">
+  <div class="product-card" data-name="Sympathy Flowers" data-price="699" data-img="image/s4.jpg">
+    <span class="heart" data-name="Sympathy Flowers" data-price="699" data-img="image/s4.jpg">♡</span>
+    <img src="image/s4.jpg" alt="Sympathy Flowers">
     <h3>Sympathy Flowers</h3>
     <p>Care & support</p>
     <p class="price">₹699</p>
-    <button class="btn" onclick="addToCart('Sympathy Flowers',699,'s4.jpg')">Add to Cart</button>
+    <button class="btn" onclick="addToCart('Sympathy Flowers',699,'image/s4.jpg')">Add to Cart</button>
   </div>
 
 </section>
@@ -758,7 +758,7 @@ function toggleWishlist(element, name, price, image) {
     }
     showToast(`✨ ${name} removed from wishlist`);
   } else {
-    wishlist.push({ name, price, image: image || 's1.jpg', addedAt: Date.now() });
+    wishlist.push({ name, price, image: image || 'image/s1.jpg', addedAt: Date.now() });
     if (heartEl) {
       heartEl.classList.add("active");
       heartEl.innerHTML = "❤️";
@@ -797,7 +797,7 @@ function updateWishlistUI() {
     const card = document.createElement("div");
     card.className = "wishlist-card";
     card.innerHTML = `
-      <img src="${item.image || 's1.jpg'}" alt="${item.name}" onerror="this.src='s1.jpg'">
+      <img src="${item.image || 's1.jpg'}" alt="${item.name}" onerror="this.src='image/s1.jpg'">
       <div class="wishlist-info">
         <h4>${item.name}</h4>
         <div class="price">₹${item.price}</div>
